@@ -394,6 +394,11 @@ public class Java2DEditor implements GenericModelEditor {
     }
 
     @Override
+    public void initStyleMenu(ERDesignerComponent aComponent, DefaultMenu aStyleMenu) {
+        aStyleMenu.setEnabled(false);
+    }
+
+    @Override
     public void setIntelligentLayoutEnabled(boolean aStatus) {
     }
 

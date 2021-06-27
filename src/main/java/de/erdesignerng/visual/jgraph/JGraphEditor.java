@@ -953,6 +953,22 @@ public class JGraphEditor extends DefaultScrollPane implements GenericModelEdito
         aLayoutMenu.add(layoutHierarchical);
     }
 
+
+
+    @Override
+    public void initStyleMenu(ERDesignerComponent aComponent, DefaultMenu aStyleMenu) {
+        aStyleMenu.setEnabled(true);
+
+        DefaultAction defaultStyle = new DefaultAction(
+                e -> performDefaultStyle(), aComponent, ERDesignerBundle.ICONDEFAULT);
+
+        DefaultAction newStyle = new DefaultAction(
+                e -> performNewStyle(), aComponent, ERDesignerBundle.ICONNEW);
+
+        aStyleMenu.add(defaultStyle);
+        aStyleMenu.add(newStyle);
+    }
+
     private List<Set<Table>> buildHierarchy(Model aModel) {
         // Try to build a hierarchy
         List<Set<Table>> theLayers = new ArrayList<>();
@@ -1180,5 +1196,13 @@ public class JGraphEditor extends DefaultScrollPane implements GenericModelEdito
     }
 
     public void commandZoomOneLevelOut() {
+    }
+
+    private void performDefaultStyle() {
+        
+    }
+
+    private void performNewStyle() {
+        
     }
 }

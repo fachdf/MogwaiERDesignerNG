@@ -53,6 +53,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+
 /**
  * The ERDesigner Editing Component.
  * <p/>
@@ -89,6 +100,8 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
 
     private DefaultMenu layoutMenu;
 
+    private DefaultMenu iconThemes;
+
     private DefaultCheckboxMenuItem displayCommentsMenuItem;
 
     private DefaultCheckboxMenuItem displayGridMenuItem;
@@ -102,8 +115,12 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
     private final ERDesignerWorldConnector worldConnector;
 
     private final DefaultComboBox zoomBox = new DefaultComboBox();
-
+    
     private DefaultAction zoomInAction;
+
+    private DefaultAction defaultTheme;
+
+    private DefaultAction newTheme;
 
     private DefaultAction zoomOutAction;
 
@@ -215,6 +232,477 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
 
         return true;
     }
+    protected final void initActions2() {
+
+        // Required by Java3D
+        JPopupMenu.setDefaultLightWeightPopupEnabled(false);
+
+        DefaultAction theReverseEngineerAction = new DefaultAction(
+                new ReverseEngineerCommand(), this,
+                ERDesignerBundle.REVERSEENGINEER);
+
+        DefaultAction thePreferencesAction = new DefaultAction(
+                new PreferencesCommand(), this,
+                ERDesignerBundle.PREFERENCES);
+
+        DefaultAction theSaveAction = new DefaultAction(new SaveToFileCommand(
+        ), this, ERDesignerBundle.SAVEMODEL2);
+        theSaveAction.putValue(DefaultAction.HOTKEY_KEY, KeyStroke
+                .getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
+
+        DefaultAction theSaveAsAction = new DefaultAction(
+                aEvent -> new SaveToFileCommand()
+                        .executeSaveFileAs(), this, ERDesignerBundle.SAVEMODELAS2);
+
+        DefaultAction theSaveToRepository = new DefaultAction(
+                new SaveToRepositoryCommand(), this,
+                ERDesignerBundle.SAVEMODELTODB2);
+
+        relationAction = new DefaultAction(
+                e -> {
+                    commandSetTool(ToolEnum.RELATION);
+                    if (!relationButton.isSelected()) {
+                        relationButton.setSelected(true);
+                    }
+                }, this, ERDesignerBundle.RELATION2);
+
+        DefaultAction theNewAction = new DefaultAction(
+                e -> commandNew(), this, ERDesignerBundle.NEWMODEL2);
+
+        DefaultAction theLruAction = new DefaultAction(this,
+                ERDesignerBundle.RECENTLYUSEDFILES);
+
+        DefaultAction theLoadAction = new DefaultAction(
+                new OpenFromFileCommand(), this, ERDesignerBundle.LOADMODEL2);
+
+        handAction = new DefaultAction(
+                e -> {
+                    commandSetTool(ToolEnum.HAND);
+
+                    if (!handButton.isSelected()) {
+                        handButton.setSelected(true);
+                    }
+                }, this, ERDesignerBundle.HAND2);
+
+        commentAction = new DefaultAction(
+                e -> {
+                    commandSetTool(ToolEnum.COMMENT);
+                    if (!commentButton.isSelected()) {
+                        commentButton.setSelected(true);
+                    }
+                }, this, ERDesignerBundle.COMMENT2);
+
+        entityAction = new DefaultAction(
+                e -> {
+                    commandSetTool(ToolEnum.ENTITY);
+                    if (!entityButton.isSelected()) {
+                        entityButton.setSelected(true);
+                    }
+                }, this, ERDesignerBundle.ENTITY2);
+
+        viewAction = new DefaultAction(
+                e -> {
+                    commandSetTool(ToolEnum.VIEW);
+                    if (!viewButton.isSelected()) {
+                        viewButton.setSelected(true);
+                    }
+                }, this, ERDesignerBundle.VIEWTOOL2);
+
+        DefaultAction theExportAction = new DefaultAction(this,
+                ERDesignerBundle.EXPORT);
+
+        DefaultAction theExitAction = new DefaultAction(
+                e -> worldConnector.exitApplication(), this, ERDesignerBundle.EXITPROGRAM2);
+
+        DefaultAction theClasspathAction = new DefaultAction(
+                new ClasspathCommand(), this, ERDesignerBundle.CLASSPATH);
+
+        DefaultAction theDBConnectionAction = new DefaultAction(
+                new DBConnectionCommand(), this,
+                ERDesignerBundle.DBCONNECTION2);
+
+        DefaultAction theRepositoryConnectionAction = new DefaultAction(
+                new RepositoryConnectionCommand(), this,
+                ERDesignerBundle.REPOSITORYCONNECTION2);
+
+        DefaultAction theDomainsAction = new DefaultAction(
+                new EditDomainCommand(), this,
+                ERDesignerBundle.DOMAINEDITOR);
+
+        DefaultAction theZoomAction = new DefaultAction(
+                aEvent -> editor.commandSetZoom((ZoomInfo) ((JComboBox) aEvent
+                        .getSource()).getSelectedItem()), this, ERDesignerBundle.ZOOM);
+
+        zoomInAction = new DefaultAction(
+                e -> zoomIn(), this, ERDesignerBundle.ZOOMIN2);
+
+        zoomOutAction = new DefaultAction(
+                e -> zoomOut(), this, ERDesignerBundle.ZOOMOUT2);
+
+        DefaultAction theGenerateSQL = new DefaultAction(
+                new GenerateSQLCommand(), this,
+                ERDesignerBundle.GENERATECREATEDBDDL);
+
+        DefaultAction theGenerateChangelog = new DefaultAction(
+                new GenerateChangeLogSQLCommand(), this,
+                ERDesignerBundle.GENERATECHANGELOG);
+
+        DefaultAction theCompleteCompareWithDatabaseAction = new DefaultAction(
+                new CompleteCompareWithDatabaseCommand(), this,
+                ERDesignerBundle.COMPLETECOMPAREWITHDATABASE);
+
+        DefaultAction theCompleteCompareWithModelAction = new DefaultAction(
+                new CompleteCompareWithOtherModelCommand(), this,
+                ERDesignerBundle.COMPLETECOMPAREWITHOTHERMODEL);
+
+        DefaultAction theConvertModelAction = new DefaultAction(
+                new ConvertModelCommand(), this,
+                ERDesignerBundle.CONVERTMODEL);
+
+        DefaultAction theCreateMigrationScriptAction = new DefaultAction(
+                new GenerateMigrationScriptCommand(), this,
+                ERDesignerBundle.CREATEMIGRATIONSCRIPT);
+
+        DefaultAction theCkeckModelAction = new DefaultAction(
+                new ModelCheckCommand(), this,
+                ERDesignerBundle.CHECKMODELFORERRORS);
+
+        DefaultAction theHelpAction = new DefaultAction(
+                aEvent -> commandShowHelp(), this, ERDesignerBundle.HELP);
+
+        exportOpenXavaAction = new DefaultAction(
+                new OpenXavaExportExportCommand(), this,
+                ERDesignerBundle.OPENXAVAEXPORT);
+
+        lruMenu = new DefaultMenu(theLruAction);
+
+        DefaultAction theStoredConnectionsAction = new DefaultAction(this,
+                ERDesignerBundle.STOREDDBCONNECTION2);
+        storedConnections = new DefaultMenu(theStoredConnectionsAction);
+
+        ERDesignerToolbarEntry theFileMenu = new ERDesignerToolbarEntry(
+                ERDesignerBundle.FILE);
+        if (worldConnector.supportsPreferences()) {
+            theFileMenu.add(new DefaultMenuItem(thePreferencesAction));
+            theFileMenu.addSeparator();
+        }
+
+        theFileMenu.add(new DefaultMenuItem(theNewAction));
+        theFileMenu.addSeparator();
+        DefaultMenuItem theSaveItem = new DefaultMenuItem(theSaveAction);
+        theFileMenu.add(theSaveItem);
+        KeyStroke theStroke = (KeyStroke) theSaveAction
+                .getValue(DefaultAction.HOTKEY_KEY);
+        if (theStroke != null) {
+            theSaveItem.setAccelerator(theStroke);
+            getDetailComponent().registerKeyboardAction(theSaveAction, theStroke,
+                    JComponent.WHEN_IN_FOCUSED_WINDOW);
+        }
+
+        theFileMenu.add(new DefaultMenuItem(theSaveAsAction));
+        theFileMenu.add(new DefaultMenuItem(theLoadAction));
+
+        if (worldConnector.supportsRepositories()) {
+            theFileMenu.addSeparator();
+            theFileMenu.add(new DefaultMenuItem(theRepositoryConnectionAction));
+            theFileMenu.add(new DefaultMenuItem(theSaveToRepository));
+
+            DefaultMenuItem theLoadFromDBMenu = new DefaultMenuItem(
+                    new DefaultAction(new OpenFromRepositoryCommand(),
+                            this, ERDesignerBundle.LOADMODELFROMDB2));
+
+            theFileMenu.add(theLoadFromDBMenu);
+
+            repositoryUtilsMenu = new DefaultMenu(this,
+                    ERDesignerBundle.REPOSITORYUTILS);
+            repositoryUtilsMenu.add(new DefaultMenuItem(
+                    theCreateMigrationScriptAction));
+
+            UIInitializer.getInstance().initialize(repositoryUtilsMenu);
+
+            theFileMenu.add(repositoryUtilsMenu);
+
+            theFileMenu.addSeparator();
+        }
+
+        exportMenu = new DefaultMenu(theExportAction);
+        theFileMenu.add(exportMenu);
+
+        theFileMenu.addSeparator();
+        theFileMenu.add(lruMenu);
+
+        if (worldConnector.supportsExitApplication()) {
+            theFileMenu.addSeparator();
+            theFileMenu.add(new DefaultMenuItem(theExitAction));
+        }
+
+        ERDesignerToolbarEntry theDBMenu = new ERDesignerToolbarEntry(
+                ERDesignerBundle.DATABASE);
+
+        boolean addSeparator = false;
+        if (worldConnector.supportsClasspathEditor()) {
+            theDBMenu.add(new DefaultMenuItem(theClasspathAction));
+            addSeparator = true;
+        }
+
+        if (worldConnector.supportsConnectionEditor()) {
+            theDBMenu.add(new DefaultMenuItem(theDBConnectionAction));
+            theDBMenu.add(storedConnections);
+            addSeparator = true;
+        }
+
+        if (addSeparator) {
+            theDBMenu.addSeparator();
+        }
+
+        theDBMenu.add(new DefaultMenuItem(editCustomTypes));
+        theDBMenu.add(new DefaultMenuItem(theDomainsAction));
+        theDBMenu.addSeparator();
+
+        theDBMenu.add(new DefaultMenuItem(theReverseEngineerAction));
+        theDBMenu.addSeparator();
+        theDBMenu.add(new DefaultMenuItem(theGenerateSQL));
+        theDBMenu.addSeparator();
+        theDBMenu.add(new DefaultMenuItem(theGenerateChangelog));
+        theDBMenu.addSeparator();
+        theDBMenu.add(new DefaultMenuItem(theCkeckModelAction));
+        theDBMenu.addSeparator();
+        theDBMenu
+                .add(new DefaultMenuItem(theCompleteCompareWithDatabaseAction));
+        theDBMenu.add(new DefaultMenuItem(theCompleteCompareWithModelAction));
+        theDBMenu.addSeparator();
+        theDBMenu.add(new DefaultMenuItem(theConvertModelAction));
+
+        if (worldConnector.supportsReporting()) {
+            documentationMenu = new DefaultMenu(this,
+                    ERDesignerBundle.CREATEDBDOCUMENTATION);
+            theDBMenu.addSeparator();
+            theDBMenu.add(documentationMenu);
+
+            updateDocumentationMenu();
+        }
+
+        ERDesignerToolbarEntry theViewMenu = new ERDesignerToolbarEntry(
+                ERDesignerBundle.VIEW);
+
+        DefaultMenu theViewModeMenu = new DefaultMenu(this,
+                ERDesignerBundle.VIEWMODE);
+
+        DefaultAction theViewMode2DDiagramAction = new DefaultAction(
+                e -> setEditor2DDiagram(), this, ERDesignerBundle.VIEWMODE2DDIAGRAM);
+        DefaultAction theViewMode2DInteractiveAction = new DefaultAction(
+                e -> setEditor2DInteractive(), this, ERDesignerBundle.VIEWMODE2DINTERACTIVE);
+        DefaultAction theViewMode3DInteractiveAction = new DefaultAction(
+                e -> setEditor3DInteractive(), this, ERDesignerBundle.VIEWMODE3DINTERACTIVE);
+
+
+        viewMode2DDiagramMenuItem = new DefaultCheckboxMenuItem(
+                theViewMode2DDiagramAction);
+        viewMode2DInteractiveMenuItem = new DefaultCheckboxMenuItem(
+                theViewMode2DInteractiveAction);
+        viewMode3DInteractiveMenuItem = new DefaultCheckboxMenuItem(
+                theViewMode3DInteractiveAction);
+
+        theViewModeMenu.add(viewMode2DDiagramMenuItem);
+        theViewModeMenu.add(viewMode2DInteractiveMenuItem);
+        theViewModeMenu.add(viewMode3DInteractiveMenuItem);
+
+        ButtonGroup theDisplayModeGroup = new ButtonGroup();
+        theDisplayModeGroup.add(viewMode2DDiagramMenuItem);
+        theDisplayModeGroup.add(viewMode2DInteractiveMenuItem);
+        theDisplayModeGroup.add(viewMode3DInteractiveMenuItem);
+
+        viewMode2DInteractiveMenuItem.setSelected(true);
+
+        theViewMenu.add(theViewModeMenu);
+        UIInitializer.getInstance().initialize(theViewModeMenu);
+
+        displayCommentsAction = new DefaultAction(
+                e -> {
+                    DefaultCheckboxMenuItem theItem = (DefaultCheckboxMenuItem) e
+                            .getSource();
+                    editor.commandSetDisplayCommentsState(theItem.isSelected());
+                }, this, ERDesignerBundle.DISPLAYCOMMENTS);
+
+        displayCommentsMenuItem = new DefaultCheckboxMenuItem(
+                displayCommentsAction);
+        displayCommentsMenuItem.setSelected(false);
+        theViewMenu.add(displayCommentsMenuItem);
+
+        displayGridAction = new DefaultAction(
+                e -> {
+                    DefaultCheckboxMenuItem theItem = (DefaultCheckboxMenuItem) e
+                            .getSource();
+                    editor.commandSetDisplayGridState(theItem.isSelected());
+                }, this, ERDesignerBundle.DISPLAYGRID);
+
+        displayGridMenuItem = new DefaultCheckboxMenuItem(displayGridAction);
+        theViewMenu.add(displayGridMenuItem);
+
+        displayLevelMenu = new DefaultMenu(this,
+                ERDesignerBundle.DISPLAYLEVEL);
+        theViewMenu.add(displayLevelMenu);
+
+        DefaultAction theDisplayAllAction = new DefaultAction(
+                e -> editor.commandSetDisplayLevel(DisplayLevel.ALL), this, ERDesignerBundle.DISPLAYALL);
+
+        DefaultAction theDisplayPKOnlyAction = new DefaultAction(
+                e -> editor.commandSetDisplayLevel(DisplayLevel.PRIMARYKEYONLY), this, ERDesignerBundle.DISPLAYPRIMARYKEY);
+
+        DefaultAction theDisplayPKAndFK = new DefaultAction(
+                e -> editor.commandSetDisplayLevel(DisplayLevel.PRIMARYKEYSANDFOREIGNKEYS), this, ERDesignerBundle.DISPLAYPRIMARYKEYANDFOREIGNKEY);
+
+        displayAllMenuItem = new DefaultRadioButtonMenuItem(theDisplayAllAction);
+        DefaultRadioButtonMenuItem thePKOnlyItem = new DefaultRadioButtonMenuItem(
+                theDisplayPKOnlyAction);
+        DefaultRadioButtonMenuItem thePKAndFKItem = new DefaultRadioButtonMenuItem(
+                theDisplayPKAndFK);
+
+        ButtonGroup theDisplayLevelGroup = new ButtonGroup();
+        theDisplayLevelGroup.add(displayAllMenuItem);
+        theDisplayLevelGroup.add(thePKOnlyItem);
+        theDisplayLevelGroup.add(thePKAndFKItem);
+
+        displayLevelMenu.add(displayAllMenuItem);
+        displayLevelMenu.add(thePKOnlyItem);
+        displayLevelMenu.add(thePKAndFKItem);
+
+        UIInitializer.getInstance().initialize(displayLevelMenu);
+
+        displayOrderMenu = new DefaultMenu(this,
+                ERDesignerBundle.DISPLAYORDER);
+        theViewMenu.add(displayOrderMenu);
+
+        DefaultAction theDisplayNaturalOrderAction = new DefaultAction(
+                e -> editor.commandSetDisplayOrder(DisplayOrder.NATURAL), this, ERDesignerBundle.DISPLAYNATURALORDER);
+
+        DefaultAction theDisplayAscendingOrderAction = new DefaultAction(
+                e -> editor.commandSetDisplayOrder(DisplayOrder.ASCENDING), this, ERDesignerBundle.DISPLAYASCENDING);
+
+        DefaultAction theDisplayDescendingOrderAction = new DefaultAction(
+                e -> editor.commandSetDisplayOrder(DisplayOrder.DESCENDING), this, ERDesignerBundle.DISPLAYDESCENDING);
+
+        displayNaturalOrderMenuItem = new DefaultRadioButtonMenuItem(
+                theDisplayNaturalOrderAction);
+        DefaultRadioButtonMenuItem theAscendingItem = new DefaultRadioButtonMenuItem(
+                theDisplayAscendingOrderAction);
+        DefaultRadioButtonMenuItem theDescendingItem = new DefaultRadioButtonMenuItem(
+                theDisplayDescendingOrderAction);
+
+        ButtonGroup theDisplayOrderGroup = new ButtonGroup();
+        theDisplayOrderGroup.add(displayNaturalOrderMenuItem);
+        theDisplayOrderGroup.add(theAscendingItem);
+        theDisplayOrderGroup.add(theDescendingItem);
+
+        displayOrderMenu.add(displayNaturalOrderMenuItem);
+        displayOrderMenu.add(theAscendingItem);
+        displayOrderMenu.add(theDescendingItem);
+
+        UIInitializer.getInstance().initialize(displayOrderMenu);
+
+        subjectAreas = new DefaultMenu(this, ERDesignerBundle.MENUSUBJECTAREAS);
+        UIInitializer.getInstance().initialize(subjectAreas);
+        theViewMenu.add(subjectAreas);
+
+        theViewMenu.addSeparator();
+
+        layoutMenu = new DefaultMenu(this, ERDesignerBundle.LAYOUT);
+        UIInitializer.getInstance().initialize(layoutMenu);
+        theViewMenu.add(layoutMenu);
+        
+        /** Style comes here */
+        iconThemes = new DefaultMenu(this, ERDesignerBundle.ICONTHEME);
+        UIInitializer.getInstance().initialize(iconThemes);
+        //UIInitializer.getInstance().initialize(iconThemes);
+        theViewMenu.add(iconThemes);
+                
+        theViewMenu.addSeparator();
+
+        theViewMenu.add(new DefaultMenuItem(zoomInAction));
+        theViewMenu.add(new DefaultMenuItem(zoomOutAction));
+
+        if (worldConnector.supportsHelp()) {
+            theViewMenu.addSeparator();
+            theViewMenu.add(new DefaultMenuItem(theHelpAction));
+        }
+
+        DefaultComboBoxModel theZoomModel = new DefaultComboBoxModel();
+        theZoomModel.addElement(ZOOMSCALE_HUNDREDPERCENT);
+        for (int i = 95; i > 0; i -= 5) {
+            theZoomModel.addElement(new ZoomInfo(i + " %", ((double) i)
+                    / (double) 100));
+        }
+        zoomBox.setPreferredSize(new Dimension(100, 21));
+        zoomBox.setMaximumSize(new Dimension(100, 21));
+        zoomBox.setAction(theZoomAction);
+        zoomBox.setModel(theZoomModel);
+        
+        
+        
+        
+
+        DefaultToolbar theToolBar = worldConnector.getToolBar();
+        DefaultAction addButtonAction = new DefaultAction(
+                e -> addButton(), this, ERDesignerBundle.NEWMODEL);
+        theToolBar.add(theFileMenu);
+        theToolBar.add(theDBMenu);
+        theToolBar.add(theViewMenu);
+        theToolBar.addSeparator();
+
+        theToolBar.add(theNewAction);
+        theToolBar.add(addButtonAction);
+        theToolBar.addSeparator();
+        theToolBar.add(theLoadAction);
+        theToolBar.add(theSaveAsAction);
+        theToolBar.addSeparator();
+        theToolBar.add(zoomBox);
+        theToolBar.addSeparator();
+        theToolBar.add(zoomInAction);
+        theToolBar.add(zoomOutAction);
+        theToolBar.addSeparator();
+
+        handButton = new DefaultToggleButton(handAction);
+        relationButton = new DefaultToggleButton(relationAction);
+        entityButton = new DefaultToggleButton(entityAction);
+        commentButton = new DefaultToggleButton(commentAction);
+        viewButton = new DefaultToggleButton(viewAction);
+         
+         /*DefaultComboBoxModel<String> modela = new DefaultComboBoxModel<String>();
+    
+         modela.addElement("A");
+         modela.addElement("C");
+         modela.addElement("D");
+         modela.addElement("E");
+        */
+        ButtonGroup theGroup = new ButtonGroup();
+        theGroup.add(handButton);
+        theGroup.add(relationButton);
+        theGroup.add(entityButton);
+        theGroup.add(commentButton);
+        theGroup.add(viewButton);
+
+        theToolBar.add(handButton);
+        theToolBar.add(entityButton);
+        theToolBar.add(relationButton);
+        theToolBar.add(commentButton);
+        theToolBar.add(viewButton);
+
+        intelligentLayoutCheckbox = new DefaultCheckBox(
+                ERDesignerBundle.INTELLIGENTLAYOUT);
+        intelligentLayoutCheckbox.setSelected(ApplicationPreferences.getInstance()
+                .isIntelligentLayout());
+        intelligentLayoutCheckbox.addActionListener(e -> editor.setIntelligentLayoutEnabled(intelligentLayoutCheckbox.isSelected()));
+
+        theToolBar.addSeparator();
+        theToolBar.add(intelligentLayoutCheckbox);
+
+        worldConnector.initTitle();
+
+        updateRecentlyUsedMenuEntries();
+
+        setupViewForNothing();
+
+    }
 
     protected boolean setEditor2DInteractive() {
         setEditor(new Java2DEditor() {
@@ -322,6 +810,12 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
         aEditor.initLayoutMenu(this, layoutMenu);
         UIInitializer.getInstance().initialize(layoutMenu);
 
+        iconThemes.removeAll();
+        aEditor.initStyleMenu(this, iconThemes);
+        UIInitializer.getInstance().initialize(iconThemes);
+        
+       // UIInitializer.getInstance().initialize(iconThemes);
+
         editor.commandSetDisplayCommentsState(displayCommentsMenuItem.isSelected());
         editor.commandSetDisplayGridState(displayGridMenuItem.isSelected());
 
@@ -371,6 +865,9 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
 
         DefaultAction theNewAction = new DefaultAction(
                 e -> commandNew(), this, ERDesignerBundle.NEWMODEL);
+        
+        DefaultAction addButtonAction = new DefaultAction(
+                e -> addButton(), this, ERDesignerBundle.NEWMODEL);
 
         DefaultAction theLruAction = new DefaultAction(this,
                 ERDesignerBundle.RECENTLYUSEDFILES);
@@ -712,7 +1209,13 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
         layoutMenu = new DefaultMenu(this, ERDesignerBundle.LAYOUT);
         UIInitializer.getInstance().initialize(layoutMenu);
         theViewMenu.add(layoutMenu);
-
+        
+        /** Style comes here */
+        iconThemes = new DefaultMenu(this, ERDesignerBundle.ICONTHEME);
+        UIInitializer.getInstance().initialize(iconThemes);
+        //UIInitializer.getInstance().initialize(iconThemes);
+        theViewMenu.add(iconThemes);
+                
         theViewMenu.addSeparator();
 
         theViewMenu.add(new DefaultMenuItem(zoomInAction));
@@ -733,6 +1236,10 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
         zoomBox.setMaximumSize(new Dimension(100, 21));
         zoomBox.setAction(theZoomAction);
         zoomBox.setModel(theZoomModel);
+        
+        
+        
+        
 
         DefaultToolbar theToolBar = worldConnector.getToolBar();
 
@@ -742,6 +1249,7 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
         theToolBar.addSeparator();
 
         theToolBar.add(theNewAction);
+        theToolBar.add(addButtonAction);
         theToolBar.addSeparator();
         theToolBar.add(theLoadAction);
         theToolBar.add(theSaveAsAction);
@@ -757,7 +1265,14 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
         entityButton = new DefaultToggleButton(entityAction);
         commentButton = new DefaultToggleButton(commentAction);
         viewButton = new DefaultToggleButton(viewAction);
-
+         
+         /*DefaultComboBoxModel<String> modela = new DefaultComboBoxModel<String>();
+    
+         modela.addElement("A");
+         modela.addElement("C");
+         modela.addElement("D");
+         modela.addElement("E");
+        */
         ButtonGroup theGroup = new ButtonGroup();
         theGroup.add(handButton);
         theGroup.add(relationButton);
@@ -785,7 +1300,12 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
         updateRecentlyUsedMenuEntries();
 
         setupViewForNothing();
+
     }
+
+    
+    
+    
 
     private void zoomOut() {
         int theIndex = zoomBox.getSelectedIndex();
@@ -950,6 +1470,14 @@ public final class ERDesignerComponent implements ResourceHelperProvider {
 
         worldConnector.setStatusText(getResourceHelper().getText(
                 ERDesignerBundle.NEWMODELCREATED));
+    }
+
+    protected void addButton() {
+        DefaultAction addButtonAction = new DefaultAction(
+                e -> addButton(), this, ERDesignerBundle.NEWMODEL);
+        DefaultToolbar theToolBar = worldConnector.getToolBar();
+        theToolBar.removeAll();
+        initActions2();
     }
 
     /**

@@ -17,35 +17,70 @@
             <Text lang="en">New model</Text>
             <Icon>/de/erdesignerng/icons/new.png</Icon>
         </Entry>
+        <Entry id="NEWMODEL2">
+            <Text lang="de">Neues Modell</Text>
+            <Text lang="en">New model</Text>
+            <Icon>/de/erdesignerng/icons/new2.png</Icon>
+        </Entry>
         <Entry id="SAVEMODEL">
             <Text lang="de">Modell speichern</Text>
             <Text lang="en">Save model</Text>
             <Icon>/de/erdesignerng/icons/script_save.png</Icon>
+        </Entry>
+        <Entry id="SAVEMODEL2">
+            <Text lang="de">Modell speichern</Text>
+            <Text lang="en">Save model</Text>
+            <Icon>/de/erdesignerng/icons/script_save2.png</Icon>
         </Entry>
         <Entry id="SAVEMODELAS">
             <Text lang="de">Modell speichern als...</Text>
             <Text lang="en">Save model as...</Text>
             <Icon>/de/erdesignerng/icons/script_save.png</Icon>
         </Entry>
+        <Entry id="SAVEMODELAS2">
+            <Text lang="de">Modell speichern als...</Text>
+            <Text lang="en">Save model as...</Text>
+            <Icon>/de/erdesignerng/icons/script_save2.png</Icon>
+        </Entry>
         <Entry id="SAVEMODELTODB">
             <Text lang="de">Modell in Repository speichern...</Text>
             <Text lang="en">Save model to repository...</Text>
             <Icon>/de/erdesignerng/icons/script_save.png</Icon>
+        </Entry>
+        <Entry id="SAVEMODELTODB2">
+            <Text lang="de">Modell in Repository speichern...</Text>
+            <Text lang="en">Save model to repository...</Text>
+            <Icon>/de/erdesignerng/icons/script_save2.png</Icon>
         </Entry>
         <Entry id="LOADMODELFROMDB">
             <Text lang="de">Modell aus Repository laden...</Text>
             <Text lang="en">Load model from repository...</Text>
             <Icon>/de/erdesignerng/icons/folder.png</Icon>
         </Entry>
+        <Entry id="LOADMODELFROMDB2">
+            <Text lang="de">Modell aus Repository laden...</Text>
+            <Text lang="en">Load model from repository...</Text>
+            <Icon>/de/erdesignerng/icons/folder2.png</Icon>
+        </Entry>
         <Entry id="LOADMODEL">
             <Text lang="de">Modell laden...</Text>
             <Text lang="en">Load model...</Text>
             <Icon>/de/erdesignerng/icons/folder.png</Icon>
         </Entry>
+        <Entry id="LOADMODEL2">
+            <Text lang="de">Modell laden...</Text>
+            <Text lang="en">Load model...</Text>
+            <Icon>/de/erdesignerng/icons/folder2.png</Icon>
+        </Entry>
         <Entry id="EXITPROGRAM">
             <Text lang="de">Programm beenden</Text>
             <Text lang="en">Exit</Text>
             <Icon>/de/erdesignerng/icons/door_in.png</Icon>
+        </Entry>
+        <Entry id="EXITPROGRAM2">
+            <Text lang="de">Programm beenden</Text>
+            <Text lang="en">Exit</Text>
+            <Icon>/de/erdesignerng/icons/door_in2.png</Icon>
         </Entry>
         <Entry id="EXPORT">
             <Text lang="de">Export</Text>
@@ -80,15 +115,30 @@
             <Text lang="en">DB - Connection...</Text>
             <Icon>/de/erdesignerng/icons/database_connect.png</Icon>
         </Entry>
+        <Entry id="DBCONNECTION2">
+            <Text lang="de">Datenbankverbindung...</Text>
+            <Text lang="en">DB - Connection...</Text>
+            <Icon>/de/erdesignerng/icons/database_connect2.png</Icon>
+        </Entry>
         <Entry id="REPOSITORYCONNECTION">
             <Text lang="de">Verbindung zum Repository...</Text>
             <Text lang="en">Repository connection...</Text>
             <Icon>/de/erdesignerng/icons/database_connect.png</Icon>
         </Entry>
+        <Entry id="REPOSITORYCONNECTION2">
+            <Text lang="de">Verbindung zum Repository...</Text>
+            <Text lang="en">Repository connection...</Text>
+            <Icon>/de/erdesignerng/icons/database_connect2.png</Icon>
+        </Entry>
         <Entry id="STOREDDBCONNECTION">
             <Text lang="de">Letzte Datenbankverbindungen</Text>
             <Text lang="en">Last DB - Connections</Text>
             <Icon>/de/erdesignerng/icons/database_connect.png</Icon>
+        </Entry>
+        <Entry id="STOREDDBCONNECTION2">
+            <Text lang="de">Letzte Datenbankverbindungen</Text>
+            <Text lang="en">Last DB - Connections</Text>
+            <Icon>/de/erdesignerng/icons/database_connect2.png</Icon>
         </Entry>
         <Entry id="REVERSEENGINEER">
             <Text lang="de">Reverse engineer...</Text>
@@ -111,22 +161,44 @@
             <Text lang="en">Zoom in</Text>
             <Icon>/de/erdesignerng/icons/magnifier_zoom_in.png</Icon>
         </Entry>
+        <Entry id="ZOOMIN2">
+            <Text lang="de">Vergrößern</Text>
+            <Text lang="en">Zoom in</Text>
+            <Icon>/de/erdesignerng/icons/magnifier_zoom_in2.png</Icon>
+        </Entry>
         <Entry id="ZOOMOUT">
             <Text lang="de">Verkleinern</Text>
             <Text lang="en">Zoom out</Text>
             <Icon>/de/erdesignerng/icons/magnifier_zoom_out.png</Icon>
         </Entry>
+        <Entry id="ZOOMOUT2">
+            <Text lang="de">Verkleinern</Text>
+            <Text lang="en">Zoom out</Text>
+            <Icon>/de/erdesignerng/icons/magnifier_zoom_out2.png</Icon>
+        </Entry>
         <Entry id="HAND">
             <Icon>/de/erdesignerng/icons/hand.gif</Icon>
+        </Entry>
+        <Entry id="HAND2">
+            <Icon>/de/erdesignerng/icons/hand2.gif</Icon>
         </Entry>
         <Entry id="ENTITY">
             <Icon>/de/erdesignerng/icons/entity.gif</Icon>
         </Entry>
+        <Entry id="ENTITY2">
+            <Icon>/de/erdesignerng/icons/entity2.gif</Icon>
+        </Entry>
         <Entry id="RELATION">
             <Icon>/de/erdesignerng/icons/relation1.gif</Icon>
         </Entry>
+        <Entry id="RELATION2">
+            <Icon>/de/erdesignerng/icons/relation12.gif</Icon>
+        </Entry>
         <Entry id="VIEWTOOL">
             <Icon>/de/erdesignerng/icons/view.gif</Icon>
+        </Entry>
+        <Entry id="VIEWTOOL2">
+            <Icon>/de/erdesignerng/icons/view2.gif</Icon>
         </Entry>
         <Entry id="ZOOM">
             <Text lang="de">Vergrößerung</Text>
@@ -181,7 +253,17 @@
             <Text lang="en">New</Text>
             <Icon>/de/erdesignerng/icons/new.png</Icon>
         </Entry>
+        <Entry id="NEW2">
+            <Text lang="de">Neu</Text>
+            <Text lang="en">New</Text>
+            <Icon>/de/erdesignerng/icons/new2.png</Icon>
+        </Entry>
         <Entry id="DELETE">
+            <Text lang="de">Löschen</Text>
+            <Text lang="en">Delete</Text>
+            <Icon>/de/erdesignerng/icons/delete.png</Icon>
+        </Entry>
+        <Entry id="DELETE2">
             <Text lang="de">Löschen</Text>
             <Text lang="en">Delete</Text>
             <Icon>/de/erdesignerng/icons/delete.png</Icon>
@@ -191,15 +273,30 @@
             <Text lang="en">Update</Text>
             <Icon>/de/erdesignerng/icons/arrow_refresh_small.png</Icon>
         </Entry>
+        <Entry id="UPDATE2">
+            <Text lang="de">Aktualisieren</Text>
+            <Text lang="en">Update</Text>
+            <Icon>/de/erdesignerng/icons/arrow_refresh_small2.png</Icon>
+        </Entry>
         <Entry id="OK">
             <Text lang="de">Ok</Text>
             <Text lang="en">Ok</Text>
             <Icon>/de/erdesignerng/icons/script_save.png</Icon>
         </Entry>
+        <Entry id="OK2">
+            <Text lang="de">Ok</Text>
+            <Text lang="en">Ok</Text>
+            <Icon>/de/erdesignerng/icons/script_save2.png</Icon>
+        </Entry>
         <Entry id="CANCEL">
             <Text lang="de">Abbrechen</Text>
             <Text lang="en">Cancel</Text>
             <Icon>/de/erdesignerng/icons/cancel.png</Icon>
+        </Entry>
+        <Entry id="CANCEL2">
+            <Text lang="de">Abbrechen</Text>
+            <Text lang="en">Cancel</Text>
+            <Icon>/de/erdesignerng/icons/cancel2.png</Icon>
         </Entry>
         <Entry id="TEST">
             <Text lang="de">Test</Text>
@@ -228,8 +325,14 @@
         <Entry id="ADDFOLDER">
             <Icon>/de/erdesignerng/icons/folder_add.png</Icon>
         </Entry>
+        <Entry id="ADDFOLDER2">
+            <Icon>/de/erdesignerng/icons/folder_add2.png</Icon>
+        </Entry>
         <Entry id="REMOVEFOLDER">
             <Icon>/de/erdesignerng/icons/folder_delete.png</Icon>
+        </Entry>
+        <Entry id="REMOVEFOLDER2">
+            <Icon>/de/erdesignerng/icons/folder_delete2.png</Icon>
         </Entry>
         <Entry id="ENTITYNAME">
             <Text lang="de">Name</Text>
@@ -416,10 +519,20 @@
             <Text lang="en">Execute</Text>
             <Icon>/de/erdesignerng/icons/database_save.png</Icon>
         </Entry>
+        <Entry id="EXECUTESCRIPT2">
+            <Text lang="de">Ausführen</Text>
+            <Text lang="en">Execute</Text>
+            <Icon>/de/erdesignerng/icons/database_save2.png</Icon>
+        </Entry>
         <Entry id="SAVESCRIPTTOFILE">
             <Text lang="de">In Datei speichern</Text>
             <Text lang="en">Save to file</Text>
             <Icon>/de/erdesignerng/icons/script_save.png</Icon>
+        </Entry>
+        <Entry id="SAVESCRIPTTOFILE2">
+            <Text lang="de">In Datei speichern</Text>
+            <Text lang="en">Save to file</Text>
+            <Icon>/de/erdesignerng/icons/script_save2.png</Icon>
         </Entry>
         <Entry id="SQLWINDOW">
             <Text lang="de">SQL Fenster</Text>
@@ -454,7 +567,17 @@
             <Text lang="en">Compare with database...</Text>
             <Icon>/de/erdesignerng/icons/compare_view.gif</Icon>
         </Entry>
+        <Entry id="COMPLETECOMPAREWITHDATABASE2">
+            <Text lang="de">Vergleichen mit Datenbank...</Text>
+            <Text lang="en">Compare with database...</Text>
+            <Icon>/de/erdesignerng/icons/compare_view2.gif</Icon>
+        </Entry>
         <Entry id="COMPLETECOMPAREWITHOTHERMODEL">
+            <Text lang="de">Vergleichen mit anderem Modell...</Text>
+            <Text lang="en">Compare with other model...</Text>
+            <Icon>/de/erdesignerng/icons/compare_view.gif</Icon>
+        </Entry>
+        <Entry id="COMPLETECOMPAREWITHOTHERMODEL2">
             <Text lang="de">Vergleichen mit anderem Modell...</Text>
             <Text lang="en">Compare with other model...</Text>
             <Icon>/de/erdesignerng/icons/compare_view.gif</Icon>
@@ -541,6 +664,9 @@
         </Entry>
         <Entry id="COMMENT">
             <Icon>/de/erdesignerng/icons/comment_add.gif</Icon>
+        </Entry>
+        <Entry id="COMMENT2">
+            <Icon>/de/erdesignerng/icons/comment_add2.gif</Icon>
         </Entry>
         <Entry id="EXPORTINGTABLENEEDSPRIMARYKEY">
             <Text lang="de">Die exportierende Tabelle muss einen Primärschlüssel haben!</Text>
@@ -629,12 +755,18 @@
         <Entry id="NEWONLYICON">
             <Icon>/de/erdesignerng/icons/new.png</Icon>
         </Entry>
+        <Entry id="NEWONLYICON2">
+            <Icon>/de/erdesignerng/icons/new2.png</Icon>
+        </Entry>
         <Entry id="ATTRIBUTEALREADYPARTOFINDEX">
             <Text lang="de">Dieses Attribut ist bereits Teil des Indexes</Text>
             <Text lang="en">This attribute is already part of this index</Text>
         </Entry>
         <Entry id="DELETEONLYICON">
             <Icon>/de/erdesignerng/icons/delete.png</Icon>
+        </Entry>
+        <Entry id="DELETEONLYICON2">
+            <Icon>/de/erdesignerng/icons/delete2.png</Icon>
         </Entry>
         <Entry id="ATTRIBUTEISUSEDININDEX">
             <Text lang="de">Dieses Attribut ist Teil eines Indexes</Text>
@@ -1144,6 +1276,19 @@
             <Text lang="de">Layout</Text>
             <Text lang="en">Layout</Text>
         </Entry>
+        <Entry id="ICONTHEME">
+            <Text lang="de">Icon Theme</Text>
+            <Text lang="en">Icon Theme</Text>
+            <Icon>/de/erdesignerng/icons/icon_theme.png</Icon>
+        </Entry>
+        <Entry id="ICONDEFAULT">
+            <Text lang="de">Default Icon Theme</Text>
+            <Text lang="en">Default Icon Theme</Text>
+        </Entry>
+        <Entry id="ICONNEW">
+            <Text lang="de">New Icon Theme</Text>
+            <Text lang="en">New Icon Theme</Text>
+        </Entry>
         <Entry id="LAYOUTCLUSTER">
             <Text lang="de">Subject Area Cluster Layout(beta)</Text>
             <Text lang="en">Subject Area Cluster Layout(beta)</Text>
@@ -1192,6 +1337,7 @@
             <Text lang="de">Nein, niemals</Text>
             <Text lang="en">No, never</Text>
         </Entry>
+        
         <Entry id="YESIWANT">
             <Text lang="de">Ja</Text>
             <Text lang="en">Yes</Text>
