@@ -174,6 +174,4 @@ public interface GenericModelEditor {
     boolean supportShowingAndHidingOfRelations();
 
     void initLayoutMenu(ERDesignerComponent aComponent, DefaultMenu aLayoutMenu);
-
-    void initStyleMenu(ERDesignerComponent aComponent, DefaultMenu aStyleMenu);
 }
