@@ -580,7 +580,7 @@
         <Entry id="COMPLETECOMPAREWITHOTHERMODEL2">
             <Text lang="de">Vergleichen mit anderem Modell...</Text>
             <Text lang="en">Compare with other model...</Text>
-            <Icon>/de/erdesignerng/icons/compare_view.gif</Icon>
+            <Icon>/de/erdesignerng/icons/compare_view2.gif</Icon>
         </Entry>
         <Entry id="CURRENTMODEL">
             <Text lang="de">Aktuelles Modell</Text>
